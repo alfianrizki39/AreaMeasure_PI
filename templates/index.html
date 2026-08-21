@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Measurement — OpenCV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────── -->
+<nav class="navbar">
+    <h1>📐 <span>Area</span>Measure</h1>
+    <div class="nav-links">
+        <a href="/" data-page="page-measure" class="active">Ukur</a>
+        <a href="/history" data-page="page-history">Riwayat</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Page: Measure                       -->
+    <!-- ═══════════════════════════════════ -->
+    <div id="page-measure" class="page active">
+        <div class="camera-section">
+
+            <!-- Camera Preview -->
+            <div class="video-wrapper">
+                <video id="camera-feed" autoplay playsinline style="display:none;"></video>
+                <canvas id="snapshot-canvas"></canvas>
+            </div>
+
+            <!-- Camera Controls -->
+            <div class="btn-group">
+                <button id="btn-start-camera" class="btn btn-primary">📷 Buka Kamera</button>
+                <button id="btn-capture" class="btn btn-primary" disabled>⚡ Ambil & Ukur</button>
+                <button id="btn-stop-camera" class="btn btn-danger" disabled>✕ Tutup Kamera</button>
+            </div>
+
+            <div class="divider">atau unggah file gambar</div>
+
+            <!-- File Upload -->
+            <div id="upload-area" class="upload-area">
+                <p>📁 Klik atau seret gambar ke sini</p>
+                <input type="file" id="file-input" accept="image/*">
+            </div>
+
+            <!-- Loading -->
+            <div id="spinner" class="spinner"></div>
+
+            <!-- Result -->
+            <div id="result-card" class="result-card">
+                <h3 class="result-title">✅ Hasil Pengukuran</h3>
+
+                <!-- Output Image (warped + contours) -->
+                <div class="result-image-wrapper">
+                    <img id="result-image" alt="Hasil pengukuran">
+                </div>
+
+                <!-- Summary -->
+                <div class="result-summary">
+                    <div class="result-stat">
+                        <span class="stat-label">Total Luas Area</span>
+                        <span class="stat-value" id="result-total-area">—</span>
+                        <span class="stat-unit">cm²</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-label">Objek Terdeteksi</span>
+                        <span class="stat-value" id="result-object-count">—</span>
+                        <span class="stat-unit">objek</span>
+                    </div>
+                </div>
+
+                <!-- Per-object detail -->
+                <div class="result-objects" id="result-objects">
+                    <!-- Diisi oleh JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Page: History                       -->
+    <!-- ═══════════════════════════════════ -->
+    <div id="page-history" class="page">
+        <div class="history-section">
+            <h2 style="margin-bottom:1rem;">📋 Riwayat Pengukuran</h2>
+
+            <div id="history-list">
+                <!-- Diisi oleh JS -->
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display:none;">
+                <p>Belum ada data pengukuran.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Lightbox overlay -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" alt="Preview">
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
